@@ -29,6 +29,8 @@ Front matter. I hate it. But until I come up with an alternative to throwing som
 
 ```
 { "name": "Front Matter and other Atrocities", "date": "2018-08-31T14:50:00" }
+
+Your content goes here. Yes, just don't mind the ugly blob at the top.
 ```
 
 `date` can be in any format JavaScript's `Date.parse()` recognises, maybe I'll expand this at some point.
