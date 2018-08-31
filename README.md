@@ -34,3 +34,11 @@ Your content goes here. Yes, just don't mind the ugly blob at the top.
 ```
 
 `date` can be in any format JavaScript's `Date.parse()` recognises, maybe I'll expand this at some point.
+
+### Defaults
+
+The default markdown CSS is in `static/css/markdown.css` and is straight up stolen from [sindresorhus/github-markdown-css](https://github.com/sindresorhus/github-markdown-css). It's the minimal amount of CSS needed to replicate GitHub's markdown look. [marked](https://github.com/markedjs/marked) is used to parse markdown.
+
+CSS for the code highlighter is in `static/css/highlight.css` and [highlight.js](https://highlightjs.org/) is used.
+
+The file names in `content/` are used to build the paths in `public/` (with the extension stripped, of course), and the `name` front matter property is only used for the item heading.
