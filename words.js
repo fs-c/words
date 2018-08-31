@@ -80,6 +80,6 @@ const rendered = templates.front({ items: items.map((item) => {
     item.shortPath = short;
 
     return item;
-})});
+}).sort((a, b) => +new Date(a.frontMatter.date) < +new Date(b.frontMatter.date))});
 
 fs.writeFileSync(path.join(publicPath, 'index.html'), rendered);
