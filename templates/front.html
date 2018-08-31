@@ -12,6 +12,12 @@
 	<style>
 		a {
 			color: #333 !important;
+			font-weight: normal;		
+		}
+
+		h3 {
+			margin-top: 2px !important;
+			margin-bottom: 2px !important;
 		}
 
 		span.date {
@@ -27,14 +33,16 @@
 	<div class="markdown-body">
 		<h2>lw's words</h2>
 
-	<% for (const item of items) { %>
-		<div class="item">
-			<h3>
-				<a href="./<%= item.shortPath %>/"><%= item.frontMatter.title %></a>
-				<span class="date"><%= item.frontMatter.humanDate %></span>
-			</h3>
-		</div>
-	<% } %>
+		
+
+		<% for (const item of items) { %>
+			<div class="item">
+				<h3>
+					<a href="./<%= item.shortPath %>/"><%= item.frontMatter.title %></a>
+					<span class="date"><%= item.frontMatter.humanDate %></span>
+				</h3>
+			</div>
+		<% } %>
 	</div>
 </body>
 
