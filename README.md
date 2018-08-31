@@ -23,6 +23,14 @@ Throw your markdown files into `content/`, optionally add some front-matter (see
 - Making `public/` a submodule pointing to `<NAME>.github.io` (et al)
 - ...
 
+A sample `deploy.sh` would for example be
+
+```bash
+node words.js
+
+scp -r public/* user@example.com:/wha/tev/er/
+```
+
 ### Front matter
 
 Front matter. I hate it. But until I come up with an alternative to throwing some metadata in front of every file I write you can add some JSON at the beginning of an `item` (ergo anything in `content/`) and it will be parsed. This looks something like:
