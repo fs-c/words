@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="A page containing, surprisingly, words.">
+	<meta name="author" content="Me.">
+
+	<link rel="icon" href="./static/favicon.png">
+	<link rel="stylesheet" href="./static/css/markdown.css">
+
+	<style>
+		a {
+			color: #333 !important;
+		}
+
+		span.date {
+			color: #6a737d;
+			font-size: 14px;
+			font-weight: normal;
+		}
+	</style>
+
+	<title>words</title>
+</head>
+<body>
+	<div class="markdown-body">
+		<h2>lw's words</h2>
+
+	<% for (const item of items) { %>
+		<div class="item">
+			<h3>
+				<a href="./<%= item.shortPath %>/"><%= item.frontMatter.title %></a>
+				<span class="date"><%= item.frontMatter.humanDate %></span>
+			</h3>
+		</div>
+	<% } %>
+	</div>
+</body>
+
+</html>
