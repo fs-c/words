@@ -2,7 +2,7 @@
 
 Because I don't see why I should have to use giants like Hugo or Jekyll if I just want to insert some parsed markdown into simple templates, and sacrifice easy tweaking and fine tuning while I'm at it.
 
-Taking some inspiration from the people over at [suckless](suckless.org), this is a zero-configuration framework.
+Taking some inspiration from the people over at [suckless](suckless.org), this project takes a zero-configuration approach.
 
 - __Want to change the .css of the markdown?__ `$ mv desired.css static/css/markdown.css`
 - __Want to insert some custom HTML in every page?__ Go to `templates/item.html` or `front.html` and _do it_.
@@ -33,7 +33,7 @@ scp -r public/* user@example.com:/wha/tev/er/
 
 ### Front matter
 
-Front matter. I hate it. But until I come up with an alternative to throwing some metadata in front of every file I write you can add some JSON at the beginning of an `item` (ergo anything in `content/`) and it will be parsed. This looks something like:
+Front matter. I hate it. But until I come up with an alternative to throwing some metadata in front of every file that's processed you can add some JSON at the beginning of an `item` (ergo anything in `content/`) and it will be parsed. This looks something like:
 
 ```
 { "name": "Front Matter and other Atrocities", "date": "2018-08-31T14:50:00" }
