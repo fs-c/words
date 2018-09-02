@@ -28,7 +28,7 @@ const parseItem = exports.parseItem = (path) => {
             throw new Error("Failed to find front matter");
             
         frontMatter = JSON.parse(file.slice(0, file.indexOf('}') + 1));
-        
+
     // TODO: Maybe fall back to some defaults here?
     } catch(err) { return console.log(err); }
 
@@ -42,7 +42,7 @@ const parseItem = exports.parseItem = (path) => {
  * Recursively copies a folder and all of its children including their contents.
  * 
  * @param {string} from Absolute path to the source folder
- * @param {string} to Absolte path to the destination folder
+ * @param {string} to Absolute path to the destination folder
  */
 const copyFolder = exports.copyFolder = (from, to) => {
     if (!fs.existsSync(from))
