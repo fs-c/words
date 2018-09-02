@@ -2,6 +2,8 @@
 
 ...or: "Setting up a GitHub Pages backed Hugo blog".
 
+>It should be noted that I do not use Hugo anymore, but this does not make this post any less valid. I switched to using [words](https://github.com/LW2904/words).
+
 I'm not going to be writing an introduction, or some long winded talk about what I want this blog to be; rather, let me tell you about how I set this up, and what little hiccups I ran into.
 
 Now, maybe as a preface of sorts, let me mention that this is the first time I am dabbling in static site generators. I say this not as some sort of excuse for technical inadequacy, but because there is a heated discussion going on, about the use of Hugo over Jekyll and vice versa. I'm not picking any sides, I'm choosing what has been recommended to me, and what my own research has shown to be the best fit for me. If you are on the fence yourself, I would like to encourage you to have a look at both of them, and to make your choice based on that.
