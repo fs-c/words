@@ -20,6 +20,7 @@ const path = require('path');
 
 const ejs = require('ejs');
 const marked = require('marked');
+const moment = require('moment');
 const { highlight } = require('highlightjs');
 
 const { parseItem, copyFolder, removeFolder } = require('./src/utils');
@@ -72,8 +73,10 @@ for (const item of items) {
 // Build front...
 const rendered = templates.front({ items: items.map((item) => {
     const date = new Date(item.frontMatter.date);
+
     item.frontMatter.humanDate = `${date.getFullYear()}-${date.getMonth()}`
         + `-${date.getDate()}`;
+    item.frontMatter.dateFromNow = moment(date).fromNow();
 
     const { path } = item;
     const short = path.slice(path.lastIndexOf('/') + 1, path.lastIndexOf('.'));
