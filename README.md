@@ -2,7 +2,7 @@
 
 Because I don't see why I should have to use giants like Hugo or Jekyll if I just want to insert some parsed markdown into simple templates, and sacrifice easy tweaking and fine tuning while I'm at it.
 
-Taking some inspiration from the people over at [suckless](suckless.org), this project takes a zero-configuration approach.
+Taking some inspiration from the people over at [suckless](https://suckless.org), this project takes a zero-configuration approach.
 
 - __Want to change the .css of the markdown?__ `$ mv desired.css static/css/markdown.css`
 - __Want to insert some custom HTML in every page?__ Go to `templates/item.html` or `front.html` and _do it_.
@@ -21,7 +21,7 @@ remove the example posts,
 $ rm -rf content/*
 ```
 
-and throw your markdown files into `content/`. If you haven't already, add some front-matter (see below) and you're good to go.
+and throw your markdown files into `content/`. If you haven't already, add some front-matter ([see below](https://github.com/LW2904/words#front-matter)) and you're good to go.
 
 `node words.js` will build the page in `public/`, you can do what you will from then on.
 
