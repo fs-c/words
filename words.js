@@ -19,11 +19,12 @@ const fs = require('fs');
 const path = require('path');
 
 const marked = require('marked');
-const moment = require('moment');
 const mustache = require('mustache');
 const { highlight } = require('highlightjs');
 
-const { parseItem, copyFolder, removeFolder } = require('./src/utils');
+const {
+    parseItem, copyFolder, removeFolder, prettyDate,
+} = require('./src/utils');
 
 const cwd = require('process').cwd();
 
@@ -81,7 +82,7 @@ for (let i = 0; i < items.length; i++) {
 
     items[i].frontMatter.humanDate = `${date.getFullYear()}-${date.getMonth()}`
         + `-${date.getDate()}`;
-    items[i].frontMatter.dateFromNow = moment(date).fromNow();
+    items[i].frontMatter.dateFromNow = prettyDate(date);
 
     const ip = items[i].path;
     const short = ip.slice(ip.lastIndexOf('/') + 1, ip.lastIndexOf('.'));
@@ -91,7 +92,7 @@ for (let i = 0; i < items.length; i++) {
 
 const renderedFront = mustache.render(templates.front, {
     // Sort items by date in descending order
-    items: items.sort((a, b) => a < b),
+    items: items.sort((a, b) => a.frontMatter.date < b.frontMatter.date),
 });
 
 fs.writeFileSync(path.join(publicPath, 'index.html'), renderedFront);
