@@ -52,14 +52,14 @@
 
 		<div class="light-seperator"></div>
 
-		<% for (const item of items) { %>
+		{{#items}}
 			<div class="item">
 				<h3>
-					<a href="./<%= item.shortPath %>/"><%= item.frontMatter.title %></a>
-					<span class="date" title="<%= item.frontMatter.humanDate %>"><%= item.frontMatter.dateFromNow %></span>
+					<a href="./{{shortPath}}/">{{frontMatter.title}}</a>
+					<span class="date" title="{{frontMatter.humanDate}}">{{frontMatter.dateFromNow}}</span>
 				</h3>
 			</div>
-		<% } %>
+		{{/items}}
 	</div>
 </body>
 

@@ -18,9 +18,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const ejs = require('ejs');
 const marked = require('marked');
 const moment = require('moment');
+const mustache = require('mustache');
 const { highlight } = require('highlightjs');
 
 const { parseItem, copyFolder, removeFolder } = require('./src/utils');
@@ -50,39 +50,48 @@ copyFolder(path.resolve(path.join(cwd, 'static')),
     path.resolve(path.join(cwd, 'public/static')));
 
 const templates = {
-    item: ejs.compile(fs.readFileSync('templates/item.html', 'utf8')),
-    front: ejs.compile(fs.readFileSync('templates/front.html', 'utf8')),
+    item: fs.readFileSync('templates/item.html', 'utf8'),
+    front: fs.readFileSync('templates/front.html', 'utf8'),
 }
 
-// Build items...
-for (const item of items) {
+// Build items and front in one loop for performance.
+for (let i = 0; i < items.length; i++) {
+    const item = items[i];
+
     // Absolute path to the folder for the item in public/.
-    const public = path.join(publicPath, path.parse(item.path).name);
+    const itemPath = path.join(publicPath, path.parse(item.path).name);
     
-    fs.mkdirSync(public);
+    fs.mkdirSync(itemPath);
 
     const data = {
         content: marked(item.content),
         title: item.frontMatter.title,
     };
 
-    fs.writeFileSync(path.join(public, 'index.html'),
-        templates.item(data));
-}
+    fs.writeFileSync(path.join(itemPath, 'index.html'),
+        mustache.render(templates.item, data));
 
-// Build front...
-const rendered = templates.front({ items: items.map((item) => {
+    // Now that it's written to disk, prepare the item with information for the
+    // front template.
+
     const date = new Date(item.frontMatter.date);
 
-    item.frontMatter.humanDate = `${date.getFullYear()}-${date.getMonth()}`
+    // This will be convenient for sorting later.
+    items[i].frontMatter.date = date;
+
+    items[i].frontMatter.humanDate = `${date.getFullYear()}-${date.getMonth()}`
         + `-${date.getDate()}`;
-    item.frontMatter.dateFromNow = moment(date).fromNow();
+    items[i].frontMatter.dateFromNow = moment(date).fromNow();
 
-    const { path } = item;
-    const short = path.slice(path.lastIndexOf('/') + 1, path.lastIndexOf('.'));
-    item.shortPath = short;
+    const ip = items[i].path;
+    const short = ip.slice(ip.lastIndexOf('/') + 1, ip.lastIndexOf('.'));
 
-    return item;
-}).sort((a, b) => +new Date(a.frontMatter.date) < +new Date(b.frontMatter.date))});
+    items[i].shortPath = short;
+}
 
-fs.writeFileSync(path.join(publicPath, 'index.html'), rendered);
+const renderedFront = mustache.render(templates.front, {
+    // Sort items by date in descending order
+    items: items.sort((a, b) => a < b),
+});
+
+fs.writeFileSync(path.join(publicPath, 'index.html'), renderedFront);
