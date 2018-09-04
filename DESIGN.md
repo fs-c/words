@@ -23,11 +23,8 @@ I'm on this crusade against dependencies mainly because the idea is to eventuall
 
 Therefore, to make this feasible: 
 
-- replace `ejs` with a self-built templating language only supporting the few features that are actually needed:
-	- output tag (equivalent: `<%=`, escaped and unescaped)
-	- looping (equivalent: `<% array.map((item) => { %> ... <% }) %>`)
+- _(edited)_ `ejs` has been replaced with `handlebars`, which is implemented in a number of different languages and should not be an obstacle to future porting efforts
+- _(edited)_ the `moment` dependecy was removed and the only function that was used has been implemented in `utils.js`
 - investigate `highlightjs` alternatives
 	- use and implement external services for hosting formatted code snippets? (GitHub Gist, ...)
 	- replace it with a more lightweight module (500kb minified, my god) and hope that equivalents exist in other languages
-- replace `moment` since we only use one little function that should be easy enough to implement as standalone
-	- if that proves to be too much of a hassle, just move back to the old post timestamp view
