@@ -59,35 +59,30 @@ const templates = {
 for (let i = 0; i < items.length; i++) {
     const item = items[i];
 
+    // Name of the item on disk, without extension.
+    const { name } = path.parse(item.path);
     // Absolute path to the folder for the item in public/.
-    const itemPath = path.join(publicPath, path.parse(item.path).name);
+    const itemPath = path.join(publicPath, name);
     
     fs.mkdirSync(itemPath);
 
-    const data = {
-        content: marked(item.content),
+    const renderedItem = mustache.render(templates.item, {
         title: item.frontMatter.title,
-    };
+        content: marked(item.content),
+    });
 
-    fs.writeFileSync(path.join(itemPath, 'index.html'),
-        mustache.render(templates.item, data));
+    fs.writeFileSync(path.join(itemPath, 'index.html'), renderedItem);
 
     // Now that it's written to disk, prepare the item with information for the
     // front template.
 
-    const date = new Date(item.frontMatter.date);
+    const date = item[i].frontMatter.date = new Date(item.frontMatter.date);
 
-    // This will be convenient for sorting later.
-    items[i].frontMatter.date = date;
-
-    items[i].frontMatter.humanDate = `${date.getFullYear()}-${date.getMonth()}`
+    items[i].frontMatter.absoluteDate = `${date.getFullYear()}-${date.getMonth()}`
         + `-${date.getDate()}`;
-    items[i].frontMatter.dateFromNow = prettyDate(date);
+    items[i].frontMatter.relativeDate = prettyDate(date);
 
-    const ip = items[i].path;
-    const short = ip.slice(ip.lastIndexOf('/') + 1, ip.lastIndexOf('.'));
-
-    items[i].shortPath = short;
+    items[i].shortPath = name;
 }
 
 const renderedFront = mustache.render(templates.front, {
