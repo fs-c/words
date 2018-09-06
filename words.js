@@ -76,7 +76,7 @@ for (let i = 0; i < items.length; i++) {
     // Now that it's written to disk, prepare the item with information for the
     // front template.
 
-    const date = item[i].frontMatter.date = new Date(item.frontMatter.date);
+    const date = items[i].frontMatter.date = new Date(item.frontMatter.date);
 
     items[i].frontMatter.absoluteDate = `${date.getFullYear()}-${date.getMonth()}`
         + `-${date.getDate()}`;
