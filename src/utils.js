@@ -36,7 +36,7 @@ const parseItem = exports.parseItem = (path) => {
     const content = file.slice(file.indexOf('}') + 1).trim();
 
     return { path, content, frontMatter };
-}
+};
 
 /**
  * Recursively copies a folder and all of its children including their contents.
@@ -79,7 +79,7 @@ const copyFolder = exports.copyFolder = (from, to) => {
             } catch (err) { return console.error(err); }
         }
     }
-}
+};
 
 /**
  * Recursively deletes a folder and all of its children including their
@@ -108,7 +108,7 @@ const removeFolder = exports.removeFolder = (folder) => {
     try {
         fs.rmdirSync(folder);
     } catch (err) { return console.error(err); }
-}
+};
 
 /**
  * @param {object} date A JS Date object
@@ -117,24 +117,26 @@ const removeFolder = exports.removeFolder = (folder) => {
  *                   be in the past) in human words.
  */
 const prettyDate = exports.prettyDate = (date) => {
+    const { floor, ceil } = Math;
+
     // Difference from now to date in seconds.
     const diff = (new Date().getTime() - date.getTime()) / 1000;
     // Difference in days.
-    const dayDiff = Math.floor(diff / 86400);
+    const dayDiff = floor(diff / (60 * 60 * 24));
 
     return ((
         dayDiff === 0 && (
             diff < 60 && "just now" ||
             diff < 120 && "1 minute ago" ||
-            diff < 3600 && Math.floor(diff / 60) + " minutes ago" ||
-            diff < 7200 && "1 hour ago" ||
-            diff < 86400 && Math.floor(diff / 3600) + " hours ago"
+            diff < (60 * 60) && floor(diff / 60) + " minutes ago" ||
+            diff < (60 * 60) * 2 && "1 hour ago" ||
+            diff < (60 * 60 * 24) && floor(diff / 3600) + " hours ago"
         )
     ) || (
         dayDiff === 1 && "1 day ago" ||
         dayDiff < 7 && dayDiff + " days ago" ||
-        dayDiff < 31 && Math.ceil(dayDiff / 7) + " weeks ago" ||
-        dayDiff < 365 && Math.ceil(dayDiff / 31) + " months ago" ||
-        Math.ceil(dayDiff / 365) + " years ago"
+        dayDiff < 31 && ceil(dayDiff / 7) + " weeks ago" ||
+        dayDiff < 365 && ceil(dayDiff / 31) + " months ago" ||
+        ceil(dayDiff / 365) + " years ago"
     ));
-}
+};
