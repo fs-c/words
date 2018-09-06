@@ -20,17 +20,12 @@ const path = require('path');
 
 const marked = require('marked');
 const mustache = require('mustache');
-const { highlight } = require('highlightjs');
 
 const {
     parseItem, copyFolder, removeFolder, prettyDate,
 } = require('./src/utils');
 
 const cwd = require('process').cwd();
-
-marked.setOptions({
-    highlight: (code, lang) => highlight(lang, code).value,
-});
 
 // Array of all parsed items, filter out those where parsing failed.
 const items = fs.readdirSync(path.join(cwd, 'content'))
