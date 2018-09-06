@@ -80,7 +80,6 @@ for (let i = 0; i < items.length; i++) {
 
     items[i].frontMatter.absoluteDate = `${date.getFullYear()}-${date.getMonth()}`
         + `-${date.getDate()}`;
-    items[i].frontMatter.relativeDate = prettyDate(date);
 
     items[i].shortPath = name;
 }
