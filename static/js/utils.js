@@ -16,15 +16,17 @@ function prettyDate(date) {
     return ((
         dayDiff == 0 && (
             diff < 60 && "just now" ||
-            diff < 120 && "1 minute ago" ||
+            diff < 120 && "a minute ago" ||
             diff < (60 * 60) && Math.floor(diff / 60) + " minutes ago" ||
-            diff < (60 * 60) * 2 && "1 hour ago" ||
+            diff < (60 * 60) * 2 && "an hour ago" ||
             diff < (60 * 60 * 24) && Math.floor(diff / 3600) + " hours ago"
         )
     ) || (
         dayDiff == 1 && "1 day ago" ||
         dayDiff < 7 && dayDiff + " days ago" ||
+        dayDiff < 11 && "a week ago" ||
         dayDiff < 31 && Math.ceil(dayDiff / 7) + " weeks ago" ||
+        dayDiff < 46 && "a month ago" ||
         dayDiff < 365 && Math.ceil(dayDiff / 31) + " months ago" ||
         Math.ceil(dayDiff / 365) + " years ago"
     ));
