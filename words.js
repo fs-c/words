@@ -27,21 +27,18 @@ const {
 
 const cwd = require('process').cwd();
 
-// Array of all parsed items, filter out those where parsing failed.
-const items = fs.readdirSync(path.join(cwd, 'content'))
-    .map((item) => path.resolve('content', item), 'utf8').map(parseItem)
-    .filter((item) => item);
+console.time('built site in');
 
-// Absolute path to the public/ folder.
+// Absolute path to the public/ folder, which will be our deployment area.
 const publicPath = path.resolve(path.join(cwd, 'public'));
 
-// Remove and recreate it if it exists.
+// Delete it and all contents recursively if it already exists.
 if (fs.existsSync(publicPath))
     removeFolder(publicPath);
 
 fs.mkdirSync(publicPath);
 
-// Copy static files from static/ into public/static/.
+// Copy static files into our deployment directory.
 copyFolder(path.resolve(path.join(cwd, 'static')),
     path.resolve(path.join(cwd, 'public/static')));
 
@@ -50,12 +47,16 @@ const templates = {
     front: fs.readFileSync('templates/front.html', 'utf8'),
 }
 
-// Build items and front in one loop for performance.
-for (let i = 0; i < items.length; i++) {
-    const item = items[i];
+const items = [];
+// Array of relative paths to all items.
+const files = fs.readdirSync(path.join(cwd, 'content'));
+
+for (const file of files) {
+    // This will act as a "staging item".
+    const item = parseItem(path.resolve('content', file));
 
     // Name of the item on disk, without extension.
-    const { name } = path.parse(item.path);
+    const name = file.split('.')[0];
     // Absolute path to the folder for the item in public/.
     const itemPath = path.join(publicPath, name);
     
@@ -71,17 +72,22 @@ for (let i = 0; i < items.length; i++) {
     // Now that it's written to disk, prepare the item with information for the
     // front template.
 
-    const date = items[i].frontMatter.date = new Date(item.frontMatter.date);
+    const date = item.frontMatter.date = new Date(item.frontMatter.date);
 
-    items[i].frontMatter.absoluteDate = `${date.getFullYear()}-${date.getMonth()}`
+    item.frontMatter.absoluteDate = `${date.getFullYear()}-${date.getMonth()}`
         + `-${date.getDate()}`;
 
-    items[i].shortPath = name;
+    item.shortPath = name;
+
+    // Push the processed item.
+    items.push(item);
 }
 
 const renderedFront = mustache.render(templates.front, {
-    // Sort items by date in descending order
+    // Sort items by date in descending order.
     items: items.sort((a, b) => a.frontMatter.date < b.frontMatter.date),
 });
 
 fs.writeFileSync(path.join(publicPath, 'index.html'), renderedFront);
+
+console.timeEnd('built site in');
