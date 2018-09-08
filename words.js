@@ -1,18 +1,17 @@
 /**
- * - Common Tasks
- *      - Fetch and parse all items
+ * - Staging
+ *      - Fetch the paths to all items
  *      - Create the public/ directory, remove if it already exists
- *      - Copy static/ to public/.
+ *      - Copy static/ to public/
  * 
- * - Build Front
- *      - Reduce items to relevant data: title, date, content snippet
- *      - Insert fetched (meta)data into Front template
- *      - Write resulting HTML to public/index.html
- * 
- * - Build Content
- *      - For every item, parse markdown to HTML
- *      - Insert HTML into Item template
- *      - Write resulting HTML to public/content/<title>.html
+ * - Item processing: for all items...
+ *      - Parse the item, including markown
+ *      - Render the item and write it to disk
+ *      - Tack on information relevant to front building
+ *  
+ * - Front building
+ *      - Sort items in descending order by date created
+ *      - Render the front and write it to disk
  */
 
 const fs = require('fs');
@@ -59,7 +58,7 @@ for (const file of files) {
     const name = file.split('.')[0];
     // Absolute path to the folder for the item in public/.
     const itemPath = path.join(publicPath, name);
-    
+
     fs.mkdirSync(itemPath);
 
     const renderedItem = mustache.render(templates.item, {
