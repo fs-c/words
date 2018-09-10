@@ -7,10 +7,10 @@ import std.datetime.date;
 import dmarkdown;
 
 struct Item {
+	Date date;
 	string path;
 	string slug;
 	string title;
-	DateTime date;
 	string content;
 }
 
@@ -23,7 +23,7 @@ Item parseItem(const string itemPath)
 	i.path = itemPath;
 	i.title = j["title"].str;
 	i.slug = itemPath.stripExtension.baseName;
-	i.date = DateTime.fromISOExtString(j["date"].str);
+	i.date = Date.fromISOExtString(j["date"].str);
 	i.content = filterMarkdown(content[indexOf(content, '\n') .. $],
 		MarkdownFlags.backtickCodeBlocks);
 
