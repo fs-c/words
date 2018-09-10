@@ -55,8 +55,8 @@
 		{{#items}}
 			<div class="item">
 				<h3>
-					<a href="./{{shortPath}}/">{{frontMatter.title}}</a>
-					<span class="date" title="{{frontMatter.date}}">{{frontMatter.absoluteDate}}</span>
+					<a href="./{{slug}}/">{{title}}</a>
+					<span class="date" title="{{date}}">{{date}}</span>
 				</h3>
 			</div>
 		{{/items}}
@@ -64,15 +64,13 @@
 
 	<script src="./static/js/utils.js"></script>	
 	<script>
-		
+
 		const items = document.getElementsByClassName("item");
 
 		for (const item of items) {
 			const span = item.children[0].children[1];
 			const date = new Date(span.getAttribute("title"));
 
-			span.setAttribute("title", span.innerHTML);
-			
 			span.innerHTML = prettyDate(date);
 		}
 
