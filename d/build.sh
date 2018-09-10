@@ -1,6 +1,6 @@
 cd d
 
-dub build
+dub build --compiler ldc2 1> /dev/null
 mv words ..
 
 cd ..
