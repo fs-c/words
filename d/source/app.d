@@ -1,18 +1,19 @@
 import std.file;
 import std.path;
-import std.stdio : writeln;
+import std.stdio : writefln;
+import core.time;
 import std.exception;
-import std.datetime.date;
 import std.algorithm.sorting;
-
 
 import item;
 import mustache;
 
 alias MustacheEngine!(string) Mustache;
 
-void _main()
+void main()
 {
+	auto start = MonoTime.currTime;
+
 	immutable publicPath = absolutePath("public");
 
 	if (publicPath.exists)
@@ -36,10 +37,7 @@ void _main()
 
 	immutable contentPath = absolutePath("content");
 	foreach(string e; dirEntries(contentPath, SpanMode.shallow)) {
-		Item i = parseItem(e);
-
-		items.length++;
-		items[items.length - 1] = i;
+		Item i = items[++items.length - 1] = parseItem(e);
 
 		immutable itemFolder = buildPath(publicPath, i.slug);
 		immutable itemPath = buildPath(itemFolder, "index.html");
@@ -63,6 +61,10 @@ void _main()
 
 	immutable frontPath = buildPath(publicPath, "index.html");	
 	write(frontPath, mustache.render(frontTemplate, frontContext));
+
+	Duration elapsed = MonoTime.currTime - start;
+
+	writefln("built %d items in %s", items.length, elapsed);
 }
 
 void copyDir(const string from, const string to)
@@ -83,10 +85,10 @@ void copyDir(const string from, const string to)
 	}
 }
 
-import std.datetime.stopwatch : benchmark, StopWatch;
-void main()
-{
-	auto b = benchmark!(_main)(100);
+// import std.datetime.stopwatch : benchmark, StopWatch;
+// void main()
+// {
+// 	auto b = benchmark!(_main)(100);
 
-	writeln(b[0] / 100);
-}
+// 	writeln(b[0] / 100);
+// }
