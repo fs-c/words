@@ -1,4 +1,9 @@
+# NodeJS specific
 node_modules
 publish.sh
 
+# D specific
+.dub
+
+words
 public/*
