@@ -1,0 +1,7 @@
+{
+	"fileVersion": 1,
+	"versions": {
+		"dmarkdown": "0.2.2",
+		"mustache-d": "0.1.3"
+	}
+}
