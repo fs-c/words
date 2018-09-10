@@ -1,4 +1,4 @@
-{ "title": "Building a Brainfuck Interpreter", "date": "2018-06-14T19:07:08+02:00" }
+{ "title": "Building a Brainfuck Interpreter", "date": "2018-06-14" }
 
 >**Brainfuck** is an [esoteric programming language](https://en.wikipedia.org/wiki/Esoteric_programming_language) created in 1993 by [Urban Müller](https://en.wikipedia.org/w/index.php?title=Urban_M%C3%BCller&action=edit&redlink=1), and notable for its extreme minimalism. The language consists of only eight simple commands and an [instruction pointer](https://en.wikipedia.org/wiki/Instruction_pointer). While it is fully [Turing complete](https://en.wikipedia.org/wiki/Turing_completeness), it is not intended for practical use, but to challenge and amuse [programmers](https://en.wikipedia.org/wiki/Programmers). Brainfuck simply requires one to break commands into microscopic steps.
 >

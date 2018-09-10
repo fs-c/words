@@ -1,4 +1,4 @@
-{ "title": "Cheating in osu!mania", "date": "2018-07-15T20:52:00+02:00" }
+{ "title": "Cheating in osu!mania", "date": "2018-07-15" }
 
 I’ve been dabbling in memory reading on Linux recently, and I’ve also been having fun with a little application called [scanmem](https://github.com/scanmem/scanmem) which can be used to isolate the address of a variable in a process.
 

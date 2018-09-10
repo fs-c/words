@@ -1,4 +1,4 @@
-{ "title": "So I Have a Blog Now", "date": "2018-06-10T20:39:58+02:00" }
+{ "title": "So I Have a Blog Now", "date": "2018-06-10" }
 
 ...or: "Setting up a GitHub Pages backed Hugo blog".
 

@@ -1,4 +1,4 @@
-{ "title": "The Beauty of Valgrind's 'memcheck'", "date": "2018-08-29T18:04:00+02:00" }
+{ "title": "The Beauty of Valgrind's 'memcheck'", "date": "2018-08-29" }
 
 
 To someone who is used to programming in languages with a GC, even just dipping ones toes into the legendary language that is C can be intimidating. You'll worry about buffer overflows, memory leaks, and the much dreaded SIGSEV that will await you when dereferencing that one little harmless looking pointer that just happened to point into an empty void.
