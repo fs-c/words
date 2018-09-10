@@ -5,10 +5,11 @@ const cwd = require('process').cwd();
 
 /**
  * @typedef {Object} Item
+ * @property {string} title Item title
+ * @property {string} slug URL-friendly, human readable title
  * @property {string} path The absolute path to the item on disk
+ * @property {string} date Publication date in any supported format
  * @property {number} content Trimmed  content with front matter stripped out
- * @property {string} frontMatter.title Item title
- * @property {string} frontMatter.date Publication date in any supported format
  */
 
 /**
@@ -17,16 +18,16 @@ const cwd = require('process').cwd();
  * 
  * @returns {Item}
  */
-const parseItem = exports.parseItem = (path) => {
+const parseItem = exports.parseItem = (item) => {
     let file = null;
     let frontMatter = null;
 
     try {
-        file = fs.readFileSync(path, 'utf8');
+        file = fs.readFileSync(item, 'utf8');
 
         if (file[0] !== '{')
             throw new Error("Failed to find front matter");
-            
+
         frontMatter = JSON.parse(file.slice(0, file.indexOf('}') + 1));
 
     // TODO: Maybe fall back to some defaults here?
@@ -35,7 +36,11 @@ const parseItem = exports.parseItem = (path) => {
     // TODO: Verify that content doesn't end up to be completely bogus.
     const content = file.slice(file.indexOf('}') + 1).trim();
 
-    return { path, content, frontMatter };
+    const { title, date } = frontMatter;
+    const slug = item.slice(item.lastIndexOf(path.sep) + 1,
+        item.lastIndexOf('.'));
+
+    return { title, slug, path, date, content };
 };
 
 /**

@@ -1,5 +1,7 @@
 #! /bin/bash
 
+cd ..
+
 DIRECTORY_TO_OBSERVE="./"
 
 function block_for_change {

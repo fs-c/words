@@ -21,12 +21,12 @@ const marked = require('marked');
 const mustache = require('mustache');
 
 const {
-    parseItem, copyFolder, removeFolder, prettyDate,
+    parseItem, copyFolder, removeFolder,
 } = require('./src/utils');
 
 const cwd = require('process').cwd();
 
-console.time('built site in');
+const start = process.hrtime();
 
 // Absolute path to the public/ folder, which will be our deployment area.
 const publicPath = path.resolve(path.join(cwd, 'public'));
@@ -44,7 +44,7 @@ copyFolder(path.resolve(path.join(cwd, 'static')),
 const templates = {
     item: fs.readFileSync('templates/item.html', 'utf8'),
     front: fs.readFileSync('templates/front.html', 'utf8'),
-}
+};
 
 const items = [];
 // Array of relative paths to all items.
@@ -54,39 +54,28 @@ for (const file of files) {
     // This will act as a "staging item".
     const item = parseItem(path.resolve('content', file));
 
-    // Name of the item on disk, without extension.
-    const name = file.split('.')[0];
     // Absolute path to the folder for the item in public/.
-    const itemPath = path.join(publicPath, name);
+    const itemPath = path.join(publicPath, item.slug);
 
     fs.mkdirSync(itemPath);
 
     const renderedItem = mustache.render(templates.item, {
-        title: item.frontMatter.title,
+        title: item.title,
         content: marked(item.content),
     });
 
     fs.writeFileSync(path.join(itemPath, 'index.html'), renderedItem);
 
-    // Now that it's written to disk, prepare the item with information for the
-    // front template.
-
-    const date = item.frontMatter.date = new Date(item.frontMatter.date);
-
-    item.frontMatter.absoluteDate = `${date.getFullYear()}-${date.getMonth()}`
-        + `-${date.getDate()}`;
-
-    item.shortPath = name;
-
-    // Push the processed item.
     items.push(item);
 }
 
 const renderedFront = mustache.render(templates.front, {
     // Sort items by date in descending order.
-    items: items.sort((a, b) => a.frontMatter.date < b.frontMatter.date),
+    items: items.sort((a, b) => new Date(a.date) < new Date(b.date)),
 });
 
 fs.writeFileSync(path.join(publicPath, 'index.html'), renderedFront);
 
-console.timeEnd('built site in');
+const diff = process.hrtime(start);
+
+console.log(`built ${items.length} items in ${diff[0]}s and ${diff[1] / 1000000}ms`);
