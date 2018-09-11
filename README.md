@@ -23,9 +23,9 @@ $ rm -rf content/*
 
 and throw your markdown files into `content/`. If you haven't already, add some front-matter ([see below](https://github.com/LW2904/words#front-matter)) and you're good to go.
 
-The "reference implementation" is the `nodejs` flavor, so if speed is not important to you, that's probably the way to go.
+The "reference implementation" is the `js` flavor, so if speed is not important to you, that's probably the way to go.
 
-`node words.js` will build the page in `public/`, you can do what you will from then on.
+`node js/words.js` will build the page in `public/`, you can do what you will from then on.
 
 - Symlinking public to some folder your web server of choice is hosting
 - Making `public/` a submodule pointing to `<NAME>.github.io` (et al)
@@ -35,7 +35,7 @@ If you want to use another implementation consult the READMEs in the relevant fo
 
 ### Folder Structure
 
-All utilities expect a folder structure like the following relative to the `cwd`.
+All utilities expect a folder structure like the following, relative to the `cwd`.
 
 ```
 ├── content		# Your markdown files go here
@@ -57,7 +57,7 @@ All utilities expect a folder structure like the following relative to the `cwd`
 │   └── js
 │       └── utils.js
 │
-└── templates		# mustache template files that are used to build the site
+└── templates		# mustache template files which are used to build the site
     │
     ├── front.html	# Template for the "landing page" - you will most likely
     │			# want to edit this
