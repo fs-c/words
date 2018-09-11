@@ -85,10 +85,12 @@ void copyDir(const string from, const string to)
 	}
 }
 
+// import std.stdio : writefln;
 // import std.datetime.stopwatch : benchmark, StopWatch;
 // void main()
 // {
-// 	auto b = benchmark!(_main)(100);
+// 	immutable runs = 1000;
+// 	auto b = benchmark!(_main)(runs);
 
-// 	writeln(b[0] / 100);
+// 	writefln("average: %s", b[0] / runs);
 // }
