@@ -78,7 +78,3 @@ Your content goes here. Yes, just don't mind the ugly blob at the top. The `name
 
 `date` has to be in the ISO 8601 extended date format. Yeah, I had to look that up too, just format it like in the example above, kay?
 
-### Defaults
-
-The default markdown CSS is in `static/css/markdown.css` and is straight up stolen from [sindresorhus/github-markdown-css](https://github.com/sindresorhus/github-markdown-css). It's the minimal amount of CSS needed to replicate GitHub's markdown look. [marked](https://github.com/markedjs/marked) is used to parse markdown.
-
