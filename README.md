@@ -35,6 +35,8 @@ If you want to use another implementation consult the READMEs in the relevant fo
 
 ### Folder Structure
 
+All utilities expect a folder structure like the following relative to the `cwd`.
+
 ```
 ├── content		# Your markdown files go here
 │   │
