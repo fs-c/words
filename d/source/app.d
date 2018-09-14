@@ -1,12 +1,12 @@
-import std.file;
-import std.path;
+import std.file : isDir, mkdir, write, exists, SpanMode, dirEntries, DirEntry,
+	copy, rmdirRecurse;
+import std.path : buildPath, absolutePath;
 import std.stdio : writefln;
-import core.time;
-import std.exception;
-import std.algorithm.sorting;
+import std.datetime : MonoTime, Duration;
+import std.algorithm.sorting : sort;
 
-import item;
-import mustache;
+import item : Item, parseItem;
+import mustache : MustacheEngine;
 
 alias MustacheEngine!(string) Mustache;
 
@@ -79,7 +79,7 @@ void copyDir(const string from, const string to)
 			to);
 
 		if (e.isDir())
-			mkdir(newPath);
+			newPath.mkdir();
 		else
 			copy(e.name, newPath);
 	}
