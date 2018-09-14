@@ -1,10 +1,11 @@
 import std.file : isDir, mkdir, write, exists, SpanMode, dirEntries, DirEntry,
 	copy, rmdirRecurse;
 import std.path : buildPath, absolutePath;
-import std.stdio : writefln;
+import std.stdio : writeln, writefln;
 import std.datetime : MonoTime, Duration;
 import std.algorithm.sorting : sort;
 
+import templates;
 import item : Item, parseItem;
 import mustache : MustacheEngine;
 
@@ -12,8 +13,6 @@ alias MustacheEngine!(string) Mustache;
 
 void main()
 {
-	auto start = MonoTime.currTime;
-
 	immutable publicPath = absolutePath("public");
 
 	if (publicPath.exists)
@@ -25,7 +24,7 @@ void main()
 	copyDir(staticPath, buildPath(publicPath, "static"));
 
 	immutable templatesPath = absolutePath("templates");
-	immutable itemTemplate = buildPath(templatesPath, "item");
+	immutable itemTemplate = buildPath(templatesPath, "item.html");
 	immutable frontTemplate = buildPath(templatesPath, "front");
 
 	Mustache mustache;
@@ -43,10 +42,7 @@ void main()
 		immutable itemPath = buildPath(itemFolder, "index.html");
 		mkdir(itemFolder);
 
-		itemContext["title"] = i.title;
-		itemContext["content"] = i.content;
-
-		write(itemPath, mustache.render(itemTemplate, itemContext));	
+		write(itemPath, renderItemTemplate(itemTemplate, i));
 	}
 
 	items.sort!("a.date > b.date");
@@ -61,10 +57,6 @@ void main()
 
 	immutable frontPath = buildPath(publicPath, "index.html");	
 	write(frontPath, mustache.render(frontTemplate, frontContext));
-
-	Duration elapsed = MonoTime.currTime - start;
-
-	writefln("built %d items in %s", items.length, elapsed);
 }
 
 void copyDir(const string from, const string to)
@@ -85,6 +77,11 @@ void copyDir(const string from, const string to)
 	}
 }
 
+/*
+ * In order to do a benchmarking run, uncomment the following block and rename
+ * the original main() to _main().
+ */
+
 // import std.stdio : writefln;
 // import std.datetime.stopwatch : benchmark, StopWatch;
 // void main()
@@ -92,5 +89,5 @@ void copyDir(const string from, const string to)
 // 	immutable runs = 1000;
 // 	auto b = benchmark!(_main)(runs);
 
-// 	writefln("average: %s", b[0] / runs);
+// 	writefln("average of %d runs: %s", runs, b[0] / runs);
 // }
