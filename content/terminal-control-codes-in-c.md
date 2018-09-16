@@ -1,6 +1,5 @@
 { "title": "Terminal Control Codes in C", "date": "2018-07-26" }
 
-
 Many terminals (and terminal emulators) support color and cursor control through a system of escape sequences. A commonly supported and used standard is often referred to as "ANSI Colour", on which the VT100 terminal specification which we will be using is based.
 
 A terminal control code is a special sequence of characters that is sent to `stdout` (like any other text). If the terminal understands the code it won't display the sequence, but will perform the action which correlates to the code.

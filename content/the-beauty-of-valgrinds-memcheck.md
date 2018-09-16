@@ -1,6 +1,5 @@
 { "title": "The Beauty of Valgrind's 'memcheck'", "date": "2018-08-29" }
 
-
 To someone who is used to programming in languages with a GC, even just dipping ones toes into the legendary language that is C can be intimidating. You'll worry about buffer overflows, memory leaks, and the much dreaded SIGSEV that will await you when dereferencing that one little harmless looking pointer that just happened to point into an empty void.
 
 It's these things (among many others, admittedly) that eventually led to the massive popularity of languages that introduced more and more hand-holding. Now, that's not a bad thing per se, but the speed, size and speed (!) benefits of C can and should not be dismissed easily. It's gotten all too common to accept that simple "Hello World" applications use up hundreds of megabytes of RAM, or depend on massive system libraries to work.
