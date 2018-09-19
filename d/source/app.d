@@ -5,7 +5,7 @@ import std.stdio : writeln, writefln;
 import std.datetime : MonoTime, Duration;
 import std.algorithm.sorting : sort;
 
-import templates;
+// import templates;
 import item : Item, parseItem;
 import mustache : MustacheEngine;
 
@@ -24,7 +24,7 @@ void main()
 	copyDir(staticPath, buildPath(publicPath, "static"));
 
 	immutable templatesPath = absolutePath("templates");
-	immutable itemTemplate = buildPath(templatesPath, "item.html");
+	immutable itemTemplate = buildPath(templatesPath, "item");
 	immutable frontTemplate = buildPath(templatesPath, "front");
 
 	Mustache mustache;
@@ -42,7 +42,10 @@ void main()
 		immutable itemPath = buildPath(itemFolder, "index.html");
 		mkdir(itemFolder);
 
-		write(itemPath, renderItemTemplate(itemTemplate, i));
+		itemContext["title"] = i.title;
+		itemContext["content"] = i.content;
+
+		write(itemPath, mustache.render(itemTemplate, itemContext));
 	}
 
 	items.sort!("a.date > b.date");
