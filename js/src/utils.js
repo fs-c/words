@@ -40,7 +40,7 @@ const parseItem = exports.parseItem = (item) => {
     const slug = item.slice(item.lastIndexOf(path.sep) + 1,
         item.lastIndexOf('.'));
 
-    return { title, slug, path, date, content };
+    return { title, slug, date, content };
 };
 
 /**
