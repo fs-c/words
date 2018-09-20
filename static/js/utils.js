@@ -13,7 +13,10 @@ function prettyDate(date) {
     // Difference in days.
     const dayDiff = Math.floor(diff / (60 * 60 * 24));
 
-    return ((
+    // The following block was removed since publication dates do not have enough
+    // precision to warrant it. It's kept around in case they ever do again -- mostly
+    // because it was annoying to write and I don't want to do it again.
+    return ((/*
         dayDiff == 0 && (
             diff < 60 && "just now" ||
             diff < 120 && "a minute ago" ||
@@ -21,7 +24,8 @@ function prettyDate(date) {
             diff < (60 * 60) * 2 && "an hour ago" ||
             diff < (60 * 60 * 24) && Math.floor(diff / 3600) + " hours ago"
         )
-    ) || (
+    ) || (*/
+        dayDiff == 0 && "today" || 
         dayDiff == 1 && "1 day ago" ||
         dayDiff < 7 && dayDiff + " days ago" ||
         dayDiff < 11 && "a week ago" ||
