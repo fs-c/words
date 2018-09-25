@@ -6,11 +6,12 @@ Taking some inspiration from the people over at [suckless](https://suckless.org)
 
 - __Want to change the .css of the markdown?__ `$ mv desired.css static/css/markdown.css`
 - __Want to insert some custom HTML in every page?__ Go to `templates/item.html` or `front.html` and _do it_.
-- __Want to exchange the code parser for some exotic asynchronous one?__ `words.js` is <100 LOC, it'll take you a minute or two at most.
+- __Want to exchange the code parser for some exotic asynchronous one?__ `source/app.d` is <100 LOC, it'll take you a minute or two at most.
 
 ### To get started...
 
 Clone the repository, 
+
 ```bash
 $ clone https://github.com/LW2904/words.git
 ```
@@ -23,15 +24,19 @@ $ rm -rf content/*
 
 and throw your markdown files into `content/`. If you haven't already, add some front-matter ([see below](https://github.com/LW2904/words#front-matter)) and you're good to go.
 
-The "reference implementation" is the `js` flavor, so if speed is not important to you, that's probably the way to go.
+Now, get yourself a [D compiler](https://wiki.dlang.org/Compilers) and do
 
-`node js/words.js` will build the page in `public/`, you can do what you will from then on.
+```bash
+$ dub build
+```
+
+in the root directory. Running `./words` will build the page in `public/`, you can do what you will from then on.
 
 - Symlinking public to some folder your web server of choice is hosting
 - Making `public/` a submodule pointing to `<NAME>.github.io` (et al)
 - ...
 
-If you want to use another implementation consult the READMEs in the relevant folders.
+I don't plan to provide binaries, but if compiling is not an option, maybe [node-words](https://github.com/LW2904/v0/tree/master/node-words) is for you.
 
 ### Folder Structure
 
@@ -40,9 +45,9 @@ All utilities expect a folder structure like the following, relative to the `cwd
 ```
 ├── content		# Your markdown files go here
 │   │
-│   ├── building-a-brainfuck-interpreter.md
-│   ├── cheating-in-osu!mania.md
-│   ├── ...
+│   ├── building-a-brainfuck-interpreter.md
+│   ├── cheating-in-osu!mania.md
+│   ├── ...
 │   .
 │
 ├── public		# The static page will be built to this folder and it is
@@ -50,18 +55,18 @@ All utilities expect a folder structure like the following, relative to the `cwd
 │
 ├── static		# This folder and all of its contents will be copied to
 │   │			# public/static on building
-│   ├── css
-│   │   ├── highlighting.css
-│   │   └── markdown.css
-│   ├── favicon.png
-│   └── js
-│       └── utils.js
+│   ├── css
+│   │   ├── highlighting.css
+│   │   └── markdown.css
+│   ├── favicon.png
+│   └── js
+│       └── utils.js
 │
 └── templates		# mustache template files which are used to build the site
     │
-    ├── front.html	# Template for the "landing page" - you will most likely
+    ├── front.html	# Template for the "landing page" - you will most likely
     │			# want to edit this
-    └── item.html	# ...for the items (aka posts, markdown files, ...)
+    └── item.html	# ...for the items (aka posts, markdown files, ...)
 ```
 
 Created with the `tree` utility and minimal post-editing.
@@ -77,4 +82,3 @@ Your content goes here. Yes, just don't mind the ugly blob at the top. The `name
 ```
 
 `date` has to be in the ISO 8601 extended date format. Yeah, I had to look that up too, just format it like in the example above, kay?
-
