@@ -53,6 +53,11 @@ Still, in around 50% of the lines of code that the JS implementation took I was 
 
 The road to finding the perfect language for the job doesn't end here, of course -- maybe it never will. As of the time of writing this, both the JS and D implementation are kept around and being worked on, although development in JS focuses mostly on experimental features that can be quickly prototyped thanks to JS' flexibility, whereas in D it's mostly performance tweaks. So far I'm fairly happy with that, since the project is at a size where maintaining and working on two codebases side-by-side like this very much feels manageable (and beneficial).
 
+>Update 10/2/18
+>
+>The `words` GitHub now exclusively contains the D sources. This has been done because, while the JS version was wonderful for quick prototyping, it just didn't live up to what `words` is trying to be.
+>`node-words` can be found in my `v0` repo, and it still serves as a playground for features that might be implemented in the main version at some point.
+
 ## Writing Words
 
 Another gripe of mine with Hugo in particular was the unclear workflow. You had the option to use `hugo new posts/path-to-new-file`, but you could also create them manually (although I still don't know if you're supposed to), and it always was a bit of a pain to get started.
