@@ -8,6 +8,8 @@ import dmarkdown : filterMarkdown, MarkdownFlags;
 
 struct Item {
 	Date date;
+	bool draft;
+	bool hidden;
 	string path;
 	string slug;
 	string title;
@@ -26,6 +28,9 @@ Item parseItem(const string itemPath)
 	i.date = Date.fromISOExtString(j["date"].str);
 	i.content = filterMarkdown(content[indexOf(content, '\n') .. $],
 		MarkdownFlags.backtickCodeBlocks);
+
+	i.draft = ("draft" in j) ? j["draft"].boolean : false;
+	i.hidden = ("hidden" in j) ? j["hidden"].boolean : false;
 
 	return i;
 }

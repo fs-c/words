@@ -38,6 +38,9 @@ void main()
 	foreach(string e; dirEntries(contentPath, SpanMode.shallow)) {
 		Item i = items[++items.length - 1] = parseItem(e);
 
+		if (i.draft)
+			continue;
+
 		immutable itemFolder = buildPath(publicPath, i.slug);
 		immutable itemPath = buildPath(itemFolder, "index.html");
 		mkdir(itemFolder);
@@ -45,12 +48,18 @@ void main()
 		itemContext["title"] = i.title;
 		itemContext["content"] = i.content;
 
+		if (i.hidden)
+			itemContext.useSection("hidden");
+
 		write(itemPath, mustache.render(itemTemplate, itemContext));
 	}
 
 	items.sort!("a.date > b.date");
 
 	foreach(ref i; items) {
+		if (i.hidden)
+			continue;
+
 		auto sub = frontContext.addSubContext("items");
 
 		sub["slug"] = i.slug;
@@ -80,8 +89,7 @@ void copyDir(const string from, const string to)
 	}
 }
 
-/*
- * In order to do a benchmarking run, uncomment the following block and rename
+/* In order to do a benchmarking run, uncomment the following block and rename
  * the original main() to _main().
  */
 
