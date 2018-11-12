@@ -6,4 +6,5 @@ publish.sh
 .dub
 
 words
+words.exe
 public/*
