@@ -41,3 +41,15 @@ Enough of that now, though, let's get into writing scripts using Node! Once you'
 Now, to see that I didn't just talk out of my ass earlier, try out the `node` command, without any switches or arguments. Lo and behold, it's a REPL!
 
 ![Node REPL inside a CMD window.](https://i.imgur.com/f3zL4eo.gif)
+
+This is pretty nice and all, but we still haven't gotten to the point where we can actually run scripts, as in files containing JavaScript code. With NodeJS that's done by running `node <script>.js`, where `<script>` is the name of the file you want to run.
+
+<script src="https://gist.github.com/LW2904/171a379fe525ca81660292f61b77566f.js"></script>
+
+The above code introduces [function declarations](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function), and [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
+
+Okay, so in the beginning I mentioned "learning to code through studying working code of practical relevance". I will now throw (well commented) code at your feet, tell you what parts of it are new/important, and give you links to relevant documentation.
+
+If you survive that for long enough, you can call yourself a programmer, congratulations.
+
+Yeah so there should be something here but I'm not creative.
