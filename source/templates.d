@@ -4,6 +4,11 @@ import std.algorithm.searching;
 
 import item;
 
+/* This code is never actually imported or used. It's more of a proof of
+ * concept, and a full implementation would likely go beyond this project's
+ * scope.
+ */
+
 string renderItemTemplate(const string templatePath, Item item)
 {
 	string[string] context;
