@@ -44,7 +44,7 @@ Assuming that this worked, the `node` command is now available anywhere in the t
 
 Since we're already in the terminal, let's create a `code` folder where we will put our scripts using `mkdir`, which is a command (just like `node`) that creates directories. To "move" to this new folder, use the `cd` command which can be used to move around the directory structure. 
 
-![Creating the code directory and switching to it using the mkdir and cd commands](https://i.imgur.com/wo363Pu.gifv)
+![Creating the code directory and switching to it using the mkdir and cd commands](https://i.imgur.com/wo363Pu.gif)
 
 A note on `cd`: to go "up" a directory, do `cd ..`. This can also be chained like `cd ../../some/other/path`.
 
