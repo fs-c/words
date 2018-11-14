@@ -1,6 +1,6 @@
 import std.file : readText;
 import std.path : baseName, stripExtension;
-import std.json : parseJSON, JSONValue;
+import std.json;
 import std.string : indexOf;
 import std.datetime.date : Date;
 
@@ -29,8 +29,13 @@ Item parseItem(const string itemPath)
 	i.content = filterMarkdown(content[indexOf(content, '\n') .. $],
 		MarkdownFlags.backtickCodeBlocks);
 
-	i.draft = ("draft" in j) ? j["draft"].boolean : false;
-	i.hidden = ("hidden" in j) ? j["hidden"].boolean : false;
+	// TODO: I have no clue why this fails to compile on Linux, the
+	//	 following is a stupid and temporary workaround.
+	// i.draft = ("draft" in j) ? j["draft"].boolean : false;
+	// i.hidden = ("hidden" in j) ? j["hidden"].boolean : false;
+
+	i.draft = ("draft" in j) ? true : false;
+	i.hidden = ("hidden" in j) ? true : false;
 
 	return i;
 }
