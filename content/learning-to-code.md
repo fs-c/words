@@ -34,11 +34,21 @@ Yes. Got that? No? Well, that's ok. What you need to know is: NodeJS (commonly r
 
 It's mainly used on servers and to write quick little console scripts, but through a number of pretty neat frameworks, some beautiful desktop and mobile apps have been developed (Discord, Atom, parts of the Facebook App). To top it off, Node is Open Source (under the MIT license) and backed by the Linux Foundation.
 
-Enough of that now, though, let's get into writing scripts using Node! Once you've installed Node, go ahead and fire up a terminal (Windows: search for "cmd" in the start menu), and type `node -v` to verify that you correctly installed NodeJS -- this should return the version of Node that is installed on your system.
+Enough of that now, though, let's get into writing scripts using Node! Once you've installed Node, you can use the `node` command in your terminal. On Windows, search for "cmd" or "Command Prompt" in the [Start Menu](https://i.imgur.com/SRqsdvE.jpg) (the thing that pops up when you press the "Windows" key) and search for "cmd" or "Command Prompt".
+
+Now, with your terminal open, you can check that Node is properly installed by issuing the `node -v` command. If everything is set up the way it should be, that will output the version number of the installed Node build (anything above 8.0.0 is fine, but >= 10.0.0 would be optimal).
 
 ![CMD window with the node -v command.](https://i.imgur.com/pZfJ70c.png)
 
-Now, to see that I didn't just talk out of my ass earlier, try out the `node` command, without any switches or arguments. Lo and behold, it's a REPL!
+Assuming that this worked, the `node` command is now available anywhere in the terminal. You probably started out in `C:\Users\<USERNAME>` (it's alright if you didn't), but you'll most likely want to do your scripting somewhere else, in a dedicated folder.
+
+Since we're already in the terminal, let's create a `code` folder where we will put our scripts using `mkdir`, which is a command (just like `node`) that creates directories. To "move" to this new folder, use the `cd` command which can be used to move around the directory structure. 
+
+![Creating the code directory and switching to it using the mkdir and cd commands](https://i.imgur.com/wo363Pu.gif)
+
+A note on `cd`: to go "up" a directory, do `cd ..`. This can also be chained like `cd ../../some/other/path`.
+
+Now, to see that I didn't just talk out of my ass earlier, about Node using a JS engine just like your browser, try out the `node` command, without any switches or arguments. Lo and behold, it's a REPL!
 
 ![Node REPL inside a CMD window.](https://i.imgur.com/f3zL4eo.gif)
 
@@ -52,4 +62,16 @@ Okay, so in the beginning I mentioned "learning to code through studying working
 
 If you survive that for long enough, you can call yourself a programmer, congratulations.
 
-Yeah so there should be something here but I'm not creative.
+As a first example, let's build a program to encrypt messages.
+
+<script src="https://gist.github.com/LW2904/61d1e0ea741f8e11c1cdd1b7063a5293.js"></script>
+
+This is very short, but there's a load of new things here:
+
+- using [`process.argv`](https://nodejs.org/dist/latest-v11.x/docs/api/process.html#process_process_argv) to get command line arguments
+- [`const`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const) and [`let`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let)
+- using the [`for...of` loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of) to iterate over a string
+
+I would really like to encourage you to at least skim the contents of the documentation I'm linking here -- this is all you're going to get.
+
+If it hasn't become obvious from reading the `process.argv` documentation yet (you _did_ read it, right?), this little script can be used like so: `node <name>.js <shift> <message>`. So, as an example, `node rot_cipher.js 2 "Don't tell anyone, but I think the NSA is watching me!"`.
