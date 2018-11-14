@@ -2,17 +2,20 @@ import std.file : isDir, mkdir, write, exists, SpanMode, dirEntries, DirEntry,
 	copy, rmdirRecurse;
 import std.path : buildPath, absolutePath;
 import std.stdio : writeln, writefln;
+import std.getopt;
 import std.datetime : MonoTime, Duration;
 import std.algorithm.sorting : sort;
 
-// import templates;
 import item : Item, parseItem;
 import mustache : MustacheEngine;
 
 alias MustacheEngine!(string) Mustache;
 
-void main()
+void main(string[] args)
 {
+	string contentPath = absolutePath("content");
+	getopt(args, "content", &contentPath);
+
 	immutable publicPath = absolutePath("public");
 
 	if (publicPath.exists)
@@ -34,7 +37,6 @@ void main()
 
 	Item[] items;
 
-	immutable contentPath = absolutePath("content");
 	foreach(string e; dirEntries(contentPath, SpanMode.shallow)) {
 		Item i = items[++items.length - 1] = parseItem(e);
 

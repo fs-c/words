@@ -43,8 +43,8 @@ I don't plan to provide binaries, but if compiling is not an option, maybe [node
 All utilities expect a folder structure like the following, relative to the `cwd`.
 
 ```
-├── content		# Your markdown files go here
-│   │
+├── [content]		# Your markdown files go here, the location can be
+│   │			# customized
 │   ├── building-a-brainfuck-interpreter.md
 │   ├── cheating-in-osu!mania.md
 │   ├── ...
@@ -82,3 +82,7 @@ Your content goes here. Yes, just don't mind the ugly blob at the top. The `name
 ```
 
 `date` has to be in the ISO 8601 extended date format. Yeah, I had to look that up too, just format it like in the example above, kay?
+
+### Options
+
+Currently only the `--content` switch exists, which can be used to pass a relative or absolute path to the folder that `words` should fetch its content files from. The default is `./content`.
