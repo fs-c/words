@@ -62,4 +62,16 @@ Okay, so in the beginning I mentioned "learning to code through studying working
 
 If you survive that for long enough, you can call yourself a programmer, congratulations.
 
-Yeah so there should be something here but I'm not creative.
+As a first example, let's build a program to encrypt messages.
+
+<script src="https://gist.github.com/LW2904/61d1e0ea741f8e11c1cdd1b7063a5293.js"></script>
+
+This is very short, but there's a load of new things here:
+
+- using [`process.argv`](https://nodejs.org/dist/latest-v11.x/docs/api/process.html#process_process_argv) to get command line arguments
+- [`const`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const) and [`let`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let)
+- using the [`for...of` loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of) to iterate over a string
+
+I would really like to encourage you to at least skim the contents of the documentation I'm linking here -- this is all you're going to get.
+
+If it hasn't become obvious from reading the `process.argv` documentation yet (you _did_ read it, right?), this little script can be used like so: `node <name>.js <shift> <message>`. So, as an example, `node rot_cipher.js 2 "Don't tell anyone, but I think the NSA is watching me!"`.
