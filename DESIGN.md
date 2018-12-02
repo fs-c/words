@@ -1,6 +1,8 @@
 _Do one thing and do it well._
 
-This is supposed to be a static site generator for people looking to get a super simple place to publish posts on running. Nothing more, nothing less.
+This is a static site generator. It should take some text files with some metadata (currently in the form of front matter), parse them, and insert relevant content into a HTML template. Additionally, it should generate an index page, listing and linking to all parsed files.
+
+These are the minimum requirements. At the same time, it should never go too far beyond them.
 
 ### Dependencies
 
