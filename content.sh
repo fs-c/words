@@ -1,1 +1,0 @@
-./words --content ../v0/docs/words/
