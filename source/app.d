@@ -59,7 +59,7 @@ void main(string[] args)
 	items.sort!("a.date > b.date");
 
 	foreach(ref i; items) {
-		if (i.hidden)
+		if (i.hidden || i.draft)
 			continue;
 
 		auto sub = frontContext.addSubContext("items");
