@@ -32,12 +32,11 @@ void main(string[] args)
 
 	Mustache mustache;
 	mustache.ext = "html";	
-	auto itemContext = new Mustache.Context;
-	auto frontContext = new Mustache.Context;
 
 	Item[] items;
 
 	foreach(string e; dirEntries(contentPath, SpanMode.shallow)) {
+		auto itemContext = new Mustache.Context;		
 		Item i = items[++items.length - 1] = parseItem(e);
 
 		if (i.draft)
@@ -57,6 +56,8 @@ void main(string[] args)
 	}
 
 	items.sort!("a.date > b.date");
+
+	auto frontContext = new Mustache.Context;	
 
 	foreach(ref i; items) {
 		if (i.hidden || i.draft)
