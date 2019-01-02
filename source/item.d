@@ -29,13 +29,11 @@ Item parseItem(const string itemPath)
 	i.content = filterMarkdown(content[indexOf(content, '\n') .. $],
 		MarkdownFlags.backtickCodeBlocks);
 
-	// TODO: I have no clue why this fails to compile on Linux, the
-	//	 following is a stupid and temporary workaround.
-	// i.draft = ("draft" in j) ? j["draft"].boolean : false;
-	// i.hidden = ("hidden" in j) ? j["hidden"].boolean : false;
-
-	i.draft = ("draft" in j) ? true : false;
-	i.hidden = ("hidden" in j) ? true : false;
+	// TODO: JSONValue does not seem to have a 'boolean' property on some
+	//	 systems, so I'll go with C-style "integers are booleans"
+	//	 notation for now.
+	i.draft = ("draft" in j) ? j["draft"].integer == 1 : false;
+	i.hidden = ("hidden" in j) ? j["hidden"].integer == 1 : false;
 
 	return i;
 }
