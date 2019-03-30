@@ -8,3 +8,5 @@ publish.sh
 words
 words.exe
 public/*
+
+bench/public
