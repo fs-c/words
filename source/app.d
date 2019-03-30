@@ -9,14 +9,16 @@ import std.algorithm.sorting : sort;
 import item : Item, parseItem;
 import mustache : MustacheEngine;
 
-alias MustacheEngine!(string) Mustache;
+alias Mustache = MustacheEngine!(string);
 
 void main(string[] args)
 {
+	string publicPath = absolutePath("public");
 	string contentPath = absolutePath("content");
-	getopt(args, "content", &contentPath);
-
-	immutable publicPath = absolutePath("public");
+	getopt(args,
+		"content", &contentPath,
+		"public", &publicPath
+	);
 
 	if (publicPath.exists)
 		publicPath.rmdirRecurse;
@@ -24,7 +26,7 @@ void main(string[] args)
 	publicPath.mkdir;
 
 	immutable staticPath = absolutePath("static");
-	copyDir(staticPath, buildPath(publicPath, "static"));
+	copyDir(staticPath, buildPath(publicPath.absolutePath, "static"));
 
 	immutable templatesPath = absolutePath("templates");
 	immutable itemTemplate = buildPath(templatesPath, "item");
@@ -91,17 +93,3 @@ void copyDir(const string from, const string to)
 			copy(e.name, newPath);
 	}
 }
-
-/* In order to do a benchmarking run, uncomment the following block and rename
- * the original main() to _main().
- */
-
-// import std.stdio : writefln;
-// import std.datetime.stopwatch : benchmark, StopWatch;
-// void main()
-// {
-// 	immutable runs = 1000;
-// 	auto b = benchmark!(_main)(runs);
-
-// 	writefln("average of %d runs: %s", runs, b[0] / runs);
-// }
