@@ -30,8 +30,7 @@ Item parseItem(const string itemPath)
 		MarkdownFlags.backtickCodeBlocks);
 
 	// TODO: JSONValue does not seem to have a 'boolean' property on some
-	//	 systems, so I'll go with C-style "integers are booleans"
-	//	 notation for now.
+    //       systems, so integers are used in their stead (think C).
 	i.draft = ("draft" in j) ? j["draft"].integer == 1 : false;
 	i.hidden = ("hidden" in j) ? j["hidden"].integer == 1 : false;
 
