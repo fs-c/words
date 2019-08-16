@@ -10,19 +10,13 @@ Taking some inspiration from the people over at [suckless](https://suckless.org)
 
 ### To get started...
 
-Clone the repository, 
+Clone the repository,
 
 ```bash
 $ clone https://github.com/LW2904/words.git
 ```
 
-remove the example posts,
-
-```bash
-$ rm -rf content/*
-```
-
-and throw your markdown files into `content/`. If you haven't already, add some front-matter ([see below](https://github.com/LW2904/words#front-matter)) and you're good to go.
+and throw your markdown files into `content/` (or link to them with `--content`). If you haven't already, add some front-matter ([see below](https://github.com/LW2904/words#front-matter)) and you're good to go.
 
 Now, get yourself a [D compiler](https://wiki.dlang.org/Compilers) and do
 
