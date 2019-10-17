@@ -15,9 +15,11 @@ void main(string[] args)
 {
 	string publicPath = absolutePath("public");
 	string contentPath = absolutePath("content");
+	string templatesPath = absolutePath("templates");
 	getopt(args,
+		"public", &publicPath,
 		"content", &contentPath,
-		"public", &publicPath
+        "templates", &templatesPath
 	);
 
 	if (publicPath.exists)
@@ -28,7 +30,6 @@ void main(string[] args)
 	immutable staticPath = absolutePath("static");
 	copyDir(staticPath, buildPath(publicPath.absolutePath, "static"));
 
-	immutable templatesPath = absolutePath("templates");
 	immutable itemTemplate = buildPath(templatesPath, "item");
 	immutable frontTemplate = buildPath(templatesPath, "front");
 

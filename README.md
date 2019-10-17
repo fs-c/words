@@ -79,4 +79,4 @@ Your content goes here. Yes, just don't mind the ugly blob at the top. The `name
 
 ### Options
 
-Currently only the `--content` switch exists, which can be used to pass a relative or absolute path to the folder that `words` should fetch its content files from. The default is `./content`.
+The `--content`, `--public`, and `--templates` switches can be used to control input and output paths. They default to their respective names.
