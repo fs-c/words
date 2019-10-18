@@ -1,7 +1,8 @@
 const core = require('@actions/core');
 
 try {
-    core.setOutput('time', Date.now());
+    const time = Date.now().toString();
+    core.setOutput('time', time);
 } catch (err) {
     core.setFailed(err.message);
 }

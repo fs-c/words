@@ -56,7 +56,8 @@ module.exports = require("os");
 const core = __webpack_require__(669);
 
 try {
-    core.setOutput('time', Date.now());
+    const time = Date.now().toString();
+    core.setOutput('time', time);
 } catch (err) {
     core.setFailed(err.message);
 }
