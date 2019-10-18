@@ -13,7 +13,7 @@ jobs:
         os: [ubuntu-latest, windows-latest]
         include:
           - os: windows-latest
-            file_extension: exe
+            file_extension: .exe
             file_name: words.exe
             asset_name: words-windows.exe
           - os: ubuntu-latest
@@ -33,17 +33,14 @@ jobs:
       with:
         compiler: ldc-latest
 
-    - name: Write Build Config
-      run: 'echo "{ \"name\": \"words\", \"dflags\": [\"-of=words-${{ matrix.os }}${{ matrix.file_extension }}\"] }" > dub.json'
-
     - name: Build Project
       run: 'dub build -y --build=release'
-
-    - name: Cleanup
-      run: rm dub.json
+    
+    - name: Normalize Output Name
+      run: mv words${{ matrix.file_extension }} words-${{ matrix.os }}${{matrix.file_extension}} 
   
   release:
-    name: Release words
+    name: Create release
     runs-on: ubuntu-latest
 
     needs: build
