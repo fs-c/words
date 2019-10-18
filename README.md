@@ -1,5 +1,7 @@
 # `words`
 
+![](https://github.com/lw2904/words/workflows/CI/badge.svg)
+
 Because I don't see why I should have to use giants like Hugo or Jekyll if I just want to insert some parsed markdown into simple templates, and sacrifice easy tweaking and fine tuning while I'm at it.
 
 Taking some inspiration from the people over at [suckless](https://suckless.org), this project takes a zero-configuration approach.
