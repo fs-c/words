@@ -21,7 +21,7 @@ jobs:
         compiler: ldc-latest
     
     - name: Build Project
-      run: dub build --non-interactive --build=release-debug --compiler=ldc
+      run: dub build -y --build=release
 
     - name: Create Release
       id: create_release
