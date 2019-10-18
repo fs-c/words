@@ -13,7 +13,7 @@ jobs:
         os: [ubuntu-latest, windows-latest]
         include:
           - os: windows-latest
-            file_name: words.exe
+            asset_name: words.exe
             release_name: words-windows.exe
           - os: ubuntu-latest
             file_name: words
