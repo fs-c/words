@@ -38,6 +38,9 @@ jobs:
     - name: Get Time
       id: time
       uses: ./.github/actions/get-time
+    
+    - name: Print Time
+      run: echo ${{ steps.time.time }}
 
     - name: Create Release
       id: create_release
