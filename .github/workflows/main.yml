@@ -18,11 +18,11 @@ jobs:
     - name: Install D compiler
       uses: mihails-strasuns/setup-dlang@v0.3.0
       with:
-        compiler: ldc-latext
+        compiler: ldc-latest
     
     - name: Build Project
-      run: dub build --non-interactive --build=release-debug --compiler=ldc2
-    
+      run: dub build --non-interactive --build=release-debug --compiler=ldc
+
     - name: Create Release
       id: create_release
       uses: actions/create-release@master
