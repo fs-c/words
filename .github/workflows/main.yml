@@ -34,7 +34,7 @@ jobs:
         compiler: ldc-latest
 
     - name: Write Build Config
-      run: 'echo "{ \"name\": \"words\", \"dflags\": \["-of=words-${{ matrix.os }}${{ matrix.file_extension }}\"] }" > dub.json'
+      run: 'echo "{ \"name\": \"words\", \"dflags\": [\"-of=words-${{ matrix.os }}${{ matrix.file_extension }}\"] }" > dub.json'
 
     - name: Build Project
       run: 'dub build -y --build=release'
