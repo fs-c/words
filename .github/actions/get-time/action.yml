@@ -1,0 +1,10 @@
+name: Get time
+description: Gets the current UNIX time
+
+outputs:
+  time:
+    description: Current UNIX time
+
+runs:
+  using: node12
+  main: dist/index.js
