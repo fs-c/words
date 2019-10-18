@@ -40,7 +40,7 @@ jobs:
       uses: ./.github/actions/get-time
     
     - name: Print Time
-      run: echo ${{ steps.time.time }}
+      run: echo ${{ steps.time.outputs.time }}
 
     - name: Create Release
       id: create_release
@@ -48,8 +48,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: nightly-${{ steps.time.time }}
-        release_name: Nightly Build (${{ steps.time.time }})
+        tag_name: nightly-${{ steps.time.outputs.time }}
+        release_name: Nightly Build (${{ steps.time.outputs.time }})
         draft: false
         prerelease: true
 
