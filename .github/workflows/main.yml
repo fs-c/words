@@ -41,8 +41,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: v0-nightly
-        release_name: Nightly Build
+        tag_name: v0-nightly-${{ github.ref }}
+        release_name: Nightly Build (${{ github.ref }})
         draft: false
         prerelease: true
 
