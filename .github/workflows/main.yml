@@ -34,6 +34,10 @@ jobs:
 
     - name: Build Project
       run: dub build -y --build=release
+    
+    - name: Get Time
+      id: time
+      uses: ./.github/actions/get-time
 
     - name: Create Release
       id: create_release
@@ -41,8 +45,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: v0-nightly-${{ github.ref }}
-        release_name: Nightly Build (${{ github.ref }})
+        tag_name: nightly-${{ steps.time.time }}
+        release_name: Nightly Build (${{ steps.time.time }})
         draft: false
         prerelease: true
 
