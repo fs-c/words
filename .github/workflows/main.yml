@@ -77,7 +77,7 @@ jobs:
         tag_name: nightly-${{ steps.time.outputs.time }}
         release_name: Nightly Build (${{ steps.time.outputs.time }})
         draft: false
-        prerelease: true
+        prerelease: false
 
     - name: Upload Release Asset Windows
       uses: actions/upload-release-asset@v1.0.1
