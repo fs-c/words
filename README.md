@@ -1,6 +1,6 @@
 # `words`
 
-![](https://github.com/lw2904/words/workflows/CI/badge.svg)
+![](https://github.com/lw2904/words/workflows/build/badge.svg)
 
 Because I don't see why I should have to use giants like Hugo or Jekyll if I just want to insert some parsed markdown into simple templates, and sacrifice easy tweaking and fine tuning while I'm at it.
 
