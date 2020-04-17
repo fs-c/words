@@ -1,3 +1,4 @@
+import std.uni : toLower;
 import std.file : readText;
 import std.path : baseName, stripExtension;
 import std.json;
@@ -22,7 +23,7 @@ Item parseItem(const string itemPath)
 	JSONValue j = content[0 .. indexOf(content, '\n')].parseJSON;
 
 	Item i;
-	i.path = itemPath;
+	i.path = itemPath.toLower;
 	i.title = j["title"].str;
 	i.slug = itemPath.stripExtension.baseName;
 	i.date = Date.fromISOExtString(j["date"].str);
