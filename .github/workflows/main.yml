@@ -64,18 +64,14 @@ jobs:
       with:
         name: build
 
-    - name: Get Time
-      id: time
-      uses: ./.github/actions/get-time
-
     - name: Create Release
       id: create_release
       uses: actions/create-release@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: nightly-${{ steps.time.outputs.time }}
-        release_name: Nightly Build (${{ steps.time.outputs.time }})
+        tag_name: build-${{ github.run_number }}
+        release_name: Build ${{ github.run_number }}
         draft: false
         prerelease: false
 
