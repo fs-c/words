@@ -39,7 +39,7 @@ void main(string[] args)
 	Item[] items;
 
 	foreach(string e; dirEntries(contentPath, SpanMode.shallow)) {
-		auto itemContext = new Mustache.Context;		
+		auto itemContext = new Mustache.Context;
 		Item i = items[++items.length - 1] = parseItem(e);
 
 		if (i.draft)
@@ -49,8 +49,10 @@ void main(string[] args)
 		immutable itemPath = buildPath(itemFolder, "index.html");
 		mkdir(itemFolder);
 
+		itemContext["slug"] = i.slug;
 		itemContext["title"] = i.title;
 		itemContext["content"] = i.content;
+		itemContext["date"] = i.date.toISOExtString;
 
 		if (i.hidden)
 			itemContext.useSection("hidden");
